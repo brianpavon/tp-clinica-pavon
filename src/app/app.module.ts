@@ -17,7 +17,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { PaginaErrorComponent } from './pages/pagina-error/pagina-error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
+import { RegistroComponent } from './pages/registro/registro.component';
+import { MaterialModule } from './material/material.module';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { MatSliderModule } from '@angular/material/slider';
     NavBarComponent,
     FooterComponent,
     LoginComponent,
-    PaginaErrorComponent    
+    PaginaErrorComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { MatSliderModule } from '@angular/material/slider';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
