@@ -1,5 +1,5 @@
 <div class="body">
-    <div class="reg-form">
+    <div class="justify-content-center">
         <form >
             <h1  class="h3 mb-3 font-weight-normal text-center" style="color: white;">Registro</h1>
             <img class="mx-auto d-block" src="assets/images/register.png" alt="" width="72" height="72">
@@ -41,30 +41,30 @@
                         <input matInput type="email">
                     </mat-form-field>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-6">                    
                     <mat-form-field appearance="fill">
-                        <mat-label>Contraseña</mat-label>
-                        <input matInput type="password">
+                        <mat-label>Contraseña</mat-label>                        
+                        <input matInput type="password">                       
                     </mat-form-field>
                 </div>                    
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center">                             
                 <mat-form-field appearance="fill">
-                    <mat-label>Seleccione</mat-label>
-                    <mat-select>
+                    <mat-label>Tipo de Perfil</mat-label>
+                    <mat-select [(value)]="tipoUsuario">
                       <mat-option value="paciente">Paciente</mat-option>
                       <mat-option value="medico">Médico</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
 
-            <div class="row">
+            <div class="row" *ngIf="tipoUsuario == 'medico'">
                 <div class="col-md-6">
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill">                        
                         <mat-label>Especialidad</mat-label>
                         <mat-select>
-                            <mat-option value="paciente">Paciente</mat-option>
-                            <mat-option value="medico">Médico</mat-option>
+                            <mat-option value="paciente">Traumatologo</mat-option>
+                            <mat-option value="medico">Clínico</mat-option>
                         </mat-select>
                     </mat-form-field>               
                 </div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" *ngIf="tipoUsuario == 'paciente'">
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Obra Social</mat-label>
@@ -85,7 +85,7 @@
                 </div>                    
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
-                        <mat-label>Fotos</mat-label>
+                        <mat-label>Foto de perfil</mat-label>
                         <input matInput>
                     </mat-form-field>
                 </div>
