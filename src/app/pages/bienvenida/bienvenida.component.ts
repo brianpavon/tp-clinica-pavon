@@ -9,16 +9,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class BienvenidaComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService) { 
+  }
+  
+  ngOnInit(): void {
     /** spinner starts on init */
     this.spinner.show();
-
+  
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 2000);
-  }
-
-  ngOnInit(): void {
   }
 
 }
