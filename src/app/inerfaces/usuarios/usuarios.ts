@@ -1,5 +1,5 @@
 export interface Usuarios {
-    id:string;
+    id:number;
     rol:string;
     nombre:string;
     apellido:string;

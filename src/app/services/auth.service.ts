@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -7,7 +8,7 @@ import Swal from 'sweetalert2';
 })
 export class AuthService { 
   toast;
-  constructor(private auth:AngularFireAuth) { 
+  constructor(private auth:AngularFireAuth,private router:Router) { 
     auth.authState.subscribe(user=>{
       //console.log(user);
     });
@@ -31,6 +32,14 @@ export class AuthService {
 
   register(email: string, password: string){
     return this.auth.createUserWithEmailAndPassword(email,password);
+  }
+
+  async verifyMail(){
+    return this.auth.currentUser.then(user=>{
+      if(user){
+        user.sendEmailVerification()
+      }
+    })
   }
   
   logout(){
@@ -94,6 +103,7 @@ export class AuthService {
       title: message,
       icon: 'success', 
     })
+    this.router.navigate(['/home']);
   }
 
   //Funcion que lanzara los diferentes mensajes de error en el login

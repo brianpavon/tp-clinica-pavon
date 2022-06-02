@@ -6,3 +6,11 @@
     background-color: darkslateblue;    
     width: 100vw;
 }
+
+.col3{
+    width: 100%;
+}
+
+.regForm{
+    max-width: 65vh;
+}

@@ -1,6 +1,6 @@
-<div class="body">
+<div class="body">    
     <div class="justify-content-center">
-        <form [formGroup]="formRegistro" (ngSubmit)="nuevoUsuario()">
+        <form [formGroup]="formRegistro" (ngSubmit)="crearUsuario()" class="regForm">
             <h1  class="h3 mb-3 font-weight-normal text-center" style="color: white;">Registro</h1>
             <img class="mx-auto d-block" src="assets/images/register.png" alt="" width="72" height="72">
 
@@ -51,49 +51,46 @@
             <div class="row justify-content-center">                             
                 <mat-form-field appearance="fill">
                     <mat-label>Tipo de Perfil</mat-label>
-                    <mat-select [(value)]="tipoUsuario" (selectionChange)="eligeTipoUsuario()">
+                    <mat-select [(value)]="tipoUsuario" (selectionChange)="eligeTipoUsuario()" formControlName="rol">
                       <mat-option value="paciente">Paciente</mat-option>
                       <mat-option value="medico">Médico</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
 
-            <div class="row" *ngIf="tipoUsuario == 'medico'">
-                <div class="col-md-6">
-                    <mat-form-field appearance="fill">                        
+            <div class="row" >
+                <div class="col-md-6" *ngIf="tipoUsuario == 'medico'">
+                    <mat-form-field appearance="fill" class="col3">                        
                         <mat-label>Especialidad</mat-label>
-                        <mat-select>
-                            <mat-option value="paciente">Traumatologo</mat-option>
-                            <mat-option value="medico">Clínico</mat-option>
+                        <mat-select formControlName="especialidad">
+                            <mat-option value="traumatologo">Traumatologo</mat-option>
+                            <mat-option value="clinico">Clínico</mat-option>
                         </mat-select>
                     </mat-form-field>               
                 </div>
-                <div class="col-md-6">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Fotos</mat-label>
-                        <input matInput>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="row" *ngIf="tipoUsuario == 'paciente'">
-                <div class="col-md-6">
-                    <mat-form-field appearance="fill">
+                <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente'">
+                    <mat-form-field appearance="fill" class="col3">
                         <mat-label>Obra Social</mat-label>
-                        <input matInput>
+                        <input matInput formControlName="obraSocial">
                     </mat-form-field>
-                </div>                    
-                <div class="col-md-6">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Foto de perfil</mat-label>
-                        <input matInput>
-                    </mat-form-field>
+                </div>         
+                <div [ngClass]="tipoUsuario == 'medico' ? 'col-md-6' : 'col-sm-4' " *ngIf="tipoUsuario == 'paciente' || tipoUsuario == 'medico' ">
+                    <div class="col3">
+                        <button type="button" (click)="fotoPerfil.click()" mat-flat-button color="primary">Subir Foto de Perfil</button>
+                        <input name="fotoPerfil" #fotoPerfil (change)="guardarImagen($event)" hidden type="file" accept=".jpg, .png, .jpeg, .svg" formControlName="fotoPerfil">
+                    </div>
+                </div>
+                <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente' ">                   
+                    <div class="col3">
+                        <button type="button" (click)="segundaImagen.click()" mat-flat-button color="primary">Subir Segunda Foto</button>
+                        <input name="segundaImagen" #segundaImagen (change)="guardarImagen($event)" hidden type="file" accept=".jpg, .png, .jpeg, .svg" formControlName="segundaImagen">
+                    </div>
                 </div>
             </div>
             
             <!--<mat-label style="color: red;">*Campos requeridos</mat-label>-->
             <hr>
-            <button [disabled]="formRegistro.invalid" class="btn btn-block" mat-flat-button color="accent">Registrarme</button>
+            <button type="submit" [disabled]="formRegistro.invalid" class="btn btn-block" mat-flat-button color="accent">Registrarme</button>
         </form>
     </div>
 </div>
