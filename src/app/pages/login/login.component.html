@@ -11,7 +11,7 @@
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" #inputPassword class="form-control m-2" placeholder="Contraseña" required>
 
-    <button class="btn btn-lg btn-primary btn-block m-2" type="button">Ingresar</button>
+    <button class="btn btn-lg btn-primary btn-block m-2" type="button" (click)="login(inputEmail.value,inputPassword.value)">Ingresar</button>
     <label>Aún no tenes cuenta? <a routerLink="/registro">Registrarse</a></label>
   </form>
 </div>

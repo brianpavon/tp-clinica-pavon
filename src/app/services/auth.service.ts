@@ -32,15 +32,7 @@ export class AuthService {
 
   register(email: string, password: string){
     return this.auth.createUserWithEmailAndPassword(email,password);
-  }
-
-  async verifyMail(){
-    return this.auth.currentUser.then(user=>{
-      if(user){
-        user.sendEmailVerification()
-      }
-    })
-  }
+  }  
   
   logout(){
     return this.auth.signOut();
@@ -103,9 +95,25 @@ export class AuthService {
       title: message,
       icon: 'success', 
     })
+    this.router.navigate(['/login']);
+  }
+
+  loginExitoso(message:string){
+    this.toast.fire({
+      title: message,
+      icon: 'success', 
+    })
     this.router.navigate(['/home']);
   }
 
+  cuentaNoVerificada(){
+    Swal.fire({
+      title: 'Para ingresar debe validar su mail. Verifique su correo (puede llegar a SPAM).',
+      icon: 'error',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Aceptar',
+    });
+  }
   //Funcion que lanzara los diferentes mensajes de error en el login
   thrownErrorsRegister(type:any){
     switch (type) {
