@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import {MatListModule} from '@angular/material/list';
     MatSelectModule,
     MatIconModule,
     MatListModule,
+    MatCardModule,
   ],
   exports:[
     MatSliderModule,
@@ -31,6 +33,7 @@ import {MatListModule} from '@angular/material/list';
     MatSelectModule,
     MatIconModule,
     MatListModule,
+    MatCardModule,
   ]
 })
 export class MaterialModule { }

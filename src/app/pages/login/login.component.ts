@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   usuarioVerificado : boolean = false;
+  esAdmin : boolean = false;
   constructor(private spinner: NgxSpinnerService,private auth :AuthService,private routes : Router) {
   }
   
@@ -35,19 +36,25 @@ export class LoginComponent implements OnInit {
       this.auth.obtenerUsuarioLogueado().subscribe(
         user=>{
           if(user?.emailVerified) this.usuarioVerificado = true;
+          if(user?.email == 'admin@mail.com') this.esAdmin = true;
         }
       )
+      
       setTimeout(() => {
         this.spinner.hide();
-        if(this.usuarioVerificado){
-            this.redirectToHome();
-            setTimeout(() => {
-              this.auth.loginExitoso('Bienvenido nuevamente!');          
-            }, 2000);
+        if(this.esAdmin){
+          this.routes.navigate(['/panel-control']);
+        }
+        else if(this.usuarioVerificado){
+          this.redirectToHome();
+          setTimeout(() => {
+            this.auth.loginExitoso('Bienvenido nuevamente!');          
+          }, 2000);
         } else{
-            this.auth.cuentaNoVerificada();
+          this.auth.cuentaNoVerificada();
         }
       }, 2000);
+      
         
     } catch (error: any) {
       this.auth.thrownErrorsLogin(error.code);
