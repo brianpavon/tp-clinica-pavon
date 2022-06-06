@@ -4,20 +4,25 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-4">
         <li class="nav-item active">
           <a class="nav-link" href="#">Página Principal <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item active" *ngIf="!usuarioLogueado">
           <a class="nav-link" routerLink="/login">Ingresar</a>
-        </li>
+        </li>        
         <!--<li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>-->
-      </ul>
-      <form class="form-inline mt-2 mt-md-0">
+      </ul>      
+      <form class="form-inline ml-auto mr-auto">        
         <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
       </form>
+      <div class="ml-5">
+        <a class="navbar-brand" routerLink="" *ngIf="usuarioLogueado | async as usuario">{{ usuario.email }}</a>
+        <a class="navbar-brand" routerLink="" *ngIf="usuarioLogueado">Salir</a>
+      </div>
+      
     </div>
   </nav>

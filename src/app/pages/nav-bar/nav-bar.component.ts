@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
+  usuarioLogueado = this.authServ.obtenerUsuarioLogueado();
+  constructor(private authServ:AuthService) { 
 
-  constructor() { }
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
 }
