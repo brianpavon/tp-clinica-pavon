@@ -9,7 +9,7 @@ import { Usuarios } from '../inerfaces/usuarios/usuarios';
 export class UsuariosService {
   itemsCollection !: AngularFirestoreCollection<Usuarios>;
   todosLosUsuarios !: Observable<Usuarios[]>;
-  
+  todosLosEspecialistas:Usuarios[] = [];
   constructor(private firestore:AngularFirestore) {
 
    }
@@ -23,4 +23,25 @@ export class UsuariosService {
      this.itemsCollection = this.firestore.collection<Usuarios>('usuarios');
      return this.todosLosUsuarios = this.itemsCollection.valueChanges();
    }
+
+   devolverEspecialistas(){
+      this.traerUsuarios().subscribe(
+        usuarios=>{
+          usuarios.forEach(usuario => {
+            if(usuario.rol == "medico"){
+              this.todosLosEspecialistas.push(usuario);
+            }
+          });
+        }
+      )
+      return this.todosLosEspecialistas;
+   }
+
+   devolverUnUsuario(id:any){
+     return this.firestore.collection<Usuarios>('usuarios').doc(id).get();
+   }
+
+   actualizarUsuario(atributo: any, id: any){
+    this.firestore.collection('usuarios').doc(id).set(atributo,{merge:true});
+  }
 }

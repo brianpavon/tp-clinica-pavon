@@ -1,4 +1,52 @@
 <div class="body">
-    <p>especialistas works!</p>
-    <a routerLink="/panel-control"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon></a>
+    <table mat-table [dataSource]="todosLosMedicos" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef> Apellido </th>
+          <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="dni">
+          <th mat-header-cell *matHeaderCellDef> DNI </th>
+          <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="especialidad">
+          <th mat-header-cell *matHeaderCellDef> Especialidad </th>
+          <td mat-cell *matCellDef="let element"> {{element.especialidad}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element"><mat-slide-toggle name="estado" checked="{{element.estado}}" (change)="cambiarEstados($event,element.id)"></mat-slide-toggle> {{element.estado ? 'Activo' : 'Inactivo'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="habilitado">
+            <th mat-header-cell *matHeaderCellDef> Habilitado </th>
+            <td mat-cell *matCellDef="let element"><mat-slide-toggle name="habilitado" (change)="cambiarEstados($event,element.id)" checked="{{element.habilitado}}"></mat-slide-toggle></td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
 </div>
+    <a routerLink="/panel-control"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon></a>    
