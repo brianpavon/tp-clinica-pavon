@@ -31,31 +31,9 @@ export class LoginComponent implements OnInit {
 
   async login(email: string, password: string) {
     try {
-      this.spinner.show();
+      
       await this.auth.login(email, password);
-      this.auth.obtenerUsuarioLogueado().subscribe(
-        user=>{
-          if(user?.emailVerified) this.usuarioVerificado = true;
-          if(user?.email == 'admin@mail.com') this.esAdmin = true;
-        }
-      )
       
-      setTimeout(() => {
-        this.spinner.hide();
-        if(this.esAdmin){
-          this.routes.navigate(['/panel-control']);
-        }
-        else if(this.usuarioVerificado){
-          this.redirectToHome();
-          setTimeout(() => {
-            this.auth.loginExitoso('Bienvenido nuevamente!');          
-          }, 2000);
-        } else{
-          this.auth.cuentaNoVerificada();
-        }
-      }, 2000);
-      
-        
     } catch (error: any) {
       this.auth.thrownErrorsLogin(error.code);
     }

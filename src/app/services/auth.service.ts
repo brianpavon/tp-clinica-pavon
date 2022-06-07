@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 })
 export class AuthService { 
   toast;
+  userFirebase : any;
   constructor(private auth:AngularFireAuth,private router:Router) { 
     auth.authState.subscribe(user=>{
       //console.log(user);
@@ -27,11 +28,33 @@ export class AuthService {
 
   //Funciones
   login(email:string, password:string){
-    return this.auth.signInWithEmailAndPassword(email,password);
+    return this.auth.signInWithEmailAndPassword(email,password).then(
+      e=>{
+        if(e.user?.email == 'admin@mail.com'){
+          this.router.navigate(['/panel-control']);
+          setTimeout(() => {
+            this.loginExitoso('Bienvenido nuevamente!');        
+          }, 2000);
+        }else if(e.user?.emailVerified){
+          this.router.navigate(['/home']);
+          setTimeout(() => {
+            this.loginExitoso('Bienvenido nuevamente!');        
+          }, 2000);
+        }else{
+          this.enviarMailParaVerificar();
+          this.cuentaNoVerificada();
+        }
+      }
+    );
   }
 
   register(email: string, password: string){
-    return this.auth.createUserWithEmailAndPassword(email,password);
+    return this.auth.createUserWithEmailAndPassword(email,password).then(
+      e=>{
+        this.userFirebase = e.user;
+        this.enviarMailParaVerificar();
+      }
+    );
   }  
   
   logout(){
@@ -95,15 +118,14 @@ export class AuthService {
       title: message,
       icon: 'success', 
     })
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 
   loginExitoso(message:string){
     this.toast.fire({
       title: message,
       icon: 'success', 
-    })
-    this.router.navigate(['/home']);
+    })    
   }
 
   cuentaNoVerificada(){
@@ -170,4 +192,14 @@ export class AuthService {
   obtenerUsuarioLogueado(){
     return this.auth.authState
   }
+
+  enviarMailParaVerificar(){
+    return this.auth.currentUser.then(
+      user=>{
+        return user?.sendEmailVerification();
+      }
+    )
+  }
+
+  
 }

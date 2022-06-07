@@ -15,7 +15,8 @@ export class UsuariosService {
    }
 
    guardarUsuario(nuevoUsuario:Usuarios){
-     this.firestore.collection('usuarios').add(nuevoUsuario);
+     //this.firestore.collection('usuarios').add(nuevoUsuario);
+     this.firestore.collection('usuarios').doc(nuevoUsuario.id.toString()).set(nuevoUsuario,{merge:true});
    }
 
    traerUsuarios(){

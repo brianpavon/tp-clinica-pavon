@@ -7,10 +7,11 @@
       <ul class="navbar-nav mr-4">
         <li class="nav-item active">
           <a class="nav-link" href="#">Página Principal <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active" *ngIf="!usuarioLogueado">
-          <a class="nav-link" routerLink="/login">Ingresar</a>
         </li>        
+        <li class="nav-item active" *ngIf="!logged">
+          <a class="nav-link" routerLink="/login">Ingresar</a>
+        </li>
+        
         <!--<li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>-->
@@ -20,8 +21,8 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
       </form>
       <div class="ml-5">
-        <a class="navbar-brand" routerLink="" *ngIf="usuarioLogueado | async as usuario">{{ usuario.email }}</a>
-        <a class="navbar-brand" routerLink="" *ngIf="usuarioLogueado">Salir</a>
+        <a class="navbar-brand" routerLink="" *ngIf="logged">{{ usuarioLogueado }}</a>
+        <a style="color: red;" class="navbar-brand" routerLink="" *ngIf="logged" (click)="desloguearse()">Salir</a>
       </div>
       
     </div>

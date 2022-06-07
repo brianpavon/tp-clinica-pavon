@@ -10,4 +10,6 @@ export interface Usuarios {
     especialidad?:string;
     obraSocial?:string;
     fotos:string;
+    estado:boolean;
+    habilitado?:boolean
 }

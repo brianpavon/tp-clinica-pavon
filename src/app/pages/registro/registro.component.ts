@@ -19,7 +19,7 @@ export class RegistroComponent implements OnInit {
   segundaFoto !:File;
   pathFotoPerfil : string = '';
   pathSegundaFoto : string = '';
-  ultimoId !: number;
+ 
   constructor(private fb:FormBuilder, private spinner: NgxSpinnerService, private usuarioServ : UsuariosService, private imgServ : ImagenService,private auth : AuthService) { 
     
     this.formRegistro = this.fb.group(
@@ -46,8 +46,7 @@ export class RegistroComponent implements OnInit {
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
-    }, 1500);
-    this.cargarUltimoId();
+    }, 1500);    
   }
 
   async crearUsuario(){
@@ -56,24 +55,24 @@ export class RegistroComponent implements OnInit {
     delete this.formRegistro.value.fotoPerfil;
     this.nuevoUsuario = this.formRegistro.value;
     
-    this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;
-    this.nuevoUsuario.id = this.ultimoId;    
+    this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;     
     this.nuevoUsuario.fotos = (this.tipoUsuario == 'paciente') ? this.pathFotoPerfil+','+this.pathSegundaFoto : this.pathFotoPerfil;   
     try {
-      await this.auth.register(this.nuevoUsuario.email,this.nuevoUsuario.clave);
-      this.auth.obtenerUsuarioLogueado().subscribe(
-        user=>{
-          user?.sendEmailVerification();
-        }
-      );
+      await this.auth.register(this.nuevoUsuario.email,this.nuevoUsuario.clave);      
+      this.nuevoUsuario.id = this.auth.userFirebase.uid;
+      //console.log(this.auth.userFirebase.uid);
+      
       if(this.tipoUsuario == 'paciente'){
+        delete this.nuevoUsuario.habilitado;
         this.imgServ.guardarImagen(this.fotoPerfil,this.pathFotoPerfil);
         this.imgServ.guardarImagen(this.segundaFoto,this.pathSegundaFoto);
       }else{
         this.imgServ.guardarImagen(this.fotoPerfil,this.pathFotoPerfil);
+        this.nuevoUsuario.habilitado = false;
       }
+      //console.log(this.nuevoUsuario);
+      this.nuevoUsuario.estado = true;      
       this.usuarioServ.guardarUsuario(this.nuevoUsuario);
-      this.cargarUltimoId();
       this.formRegistro.reset();
       this.auth.authSuccess('Registro exitoso! No olvide verificar su email.');
     } catch (error : any) {
@@ -124,29 +123,4 @@ export class RegistroComponent implements OnInit {
       //console.log(this.pathSegundaFoto);
     }
   }
-
-
-  cargarUltimoId(){
-    this.usuarioServ.traerUsuarios().subscribe(
-      usuarios => {
-       this.ultimoId = usuarios.length + 1;
-      }
-    );    
-  }
-
-  
-  async registrarUsuario(email:string,clave:string){
-    try {
-      await this.auth.register(email,clave);
-      this.auth.obtenerUsuarioLogueado().subscribe(
-        user=>{
-          user?.sendEmailVerification();
-        }
-      );
-    } catch (error : any) {
-      //console.log(error);
-      this.auth.thrownErrorsRegister(error.code);
-    }
-  }
-
 }
