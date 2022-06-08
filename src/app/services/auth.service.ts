@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UsuariosService } from './usuarios.service';
+import { tap,first } from 'rxjs/operators';
+import { Usuarios } from '../inerfaces/usuarios/usuarios';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,8 @@ import Swal from 'sweetalert2';
 export class AuthService { 
   toast;
   userFirebase : any;
-  constructor(private auth:AngularFireAuth,private router:Router) { 
+  usuarioDB : any
+  constructor(private auth:AngularFireAuth,private router:Router, private userService: UsuariosService) { 
     auth.authState.subscribe(user=>{
       //console.log(user);
     });
@@ -27,19 +31,40 @@ export class AuthService {
   }
 
   //Funciones
-  login(email:string, password:string){
+  async login(email:string, password:string){
     return this.auth.signInWithEmailAndPassword(email,password).then(
-      e=>{
+      async e=>{
         if(e.user?.email == 'admin@mail.com'){
           this.router.navigate(['/panel-control']);
           setTimeout(() => {
             this.loginExitoso('Bienvenido nuevamente!');        
           }, 2000);
-        }else if(e.user?.emailVerified){
-          this.router.navigate(['/home']);
-          setTimeout(() => {
-            this.loginExitoso('Bienvenido nuevamente!');        
-          }, 2000);
+        }else if(e.user?.emailVerified){        
+          this.usuarioDB = await this.userService.devolverDataUsuarioDB(e.user.uid);
+
+          switch (this.usuarioDB.rol) {
+            case 'medico':
+                if(this.usuarioDB.habilitado){
+                  this.router.navigate(['/home']);
+                  setTimeout(() => {
+                    this.loginExitoso('Bienvenido nuevamente!');        
+                  }, 2000);
+                }else{
+                  this.medicoNoActivo();
+                }              
+              break;
+              
+            case 'paciente':
+              this.router.navigate(['/home']);
+              setTimeout(() => {
+                this.loginExitoso('Bienvenido nuevamente!');        
+              }, 2000);
+              break;
+          
+            default:
+              break;
+          }
+
         }else{
           this.enviarMailParaVerificar();
           this.cuentaNoVerificada();
@@ -136,6 +161,17 @@ export class AuthService {
       confirmButtonText: 'Aceptar',
     });
   }
+
+  medicoNoActivo(){
+    Swal.fire({
+      title: 'El administrador aún no aprobó su solicitud para ser especialista.',
+      icon: 'warning',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Aceptar',
+    });
+  }
+
+
   //Funcion que lanzara los diferentes mensajes de error en el login
   thrownErrorsRegister(type:any){
     switch (type) {
