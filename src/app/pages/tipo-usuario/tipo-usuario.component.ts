@@ -1,4 +1,6 @@
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-tipo-usuario',
@@ -7,7 +9,25 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 })
 export class TipoUsuarioComponent implements OnInit {
   @Output() tipoUsuario : EventEmitter<any> = new EventEmitter<any>();
-  constructor() { }
+
+  esAdmin : boolean = false;
+  usuarioDB : any;
+
+  constructor(private usuarioServ : UsuariosService,private authFire:AngularFireAuth) { 
+    //Para ver si es admin y puede generar otros admins
+    this.authFire.authState.subscribe(
+      async user=>{
+        if(user && user?.email == 'admin@mail.com'){
+          this.esAdmin = true;
+        }else if(user){
+          this.usuarioDB = await this.usuarioServ.devolverDataUsuarioDB(user?.uid);
+          if(this.usuarioDB.rol == 'admin'){
+            this.esAdmin = true;
+          }
+        }          
+      }
+    )
+  }
 
   ngOnInit(): void {
   }

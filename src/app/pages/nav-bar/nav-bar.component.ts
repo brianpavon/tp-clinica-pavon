@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 
 @Component({
@@ -12,10 +13,12 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent implements OnInit {
   logged : boolean = false;
   usuarioLogueado : any;
+  usuarioDB : any;
   constructor(private auth:AngularFireAuth,private authServ:AuthService, private routes:Router) { 
     this.auth.authState.subscribe(
       user=>{
         if(user && user?.emailVerified || user?.email == 'admin@mail.com'){
+          
           this.usuarioLogueado = user.email;
           this.logged = true;
         }
@@ -30,6 +33,7 @@ export class NavBarComponent implements OnInit {
   desloguearse(){
     this.authServ.logout();
     this.logged = false;
+    this.usuarioLogueado = '';
     //this.routes.navigate(['/home']);
   }
 }

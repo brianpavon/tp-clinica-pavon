@@ -60,6 +60,13 @@ export class AuthService {
                 this.loginExitoso('Bienvenido nuevamente!');        
               }, 2000);
               break;
+
+            case 'admin':
+              this.router.navigate(['/panel-control']);
+              setTimeout(() => {
+                this.loginExitoso('Bienvenido nuevamente!');        
+              }, 2000);
+              break;
           
             default:
               break;

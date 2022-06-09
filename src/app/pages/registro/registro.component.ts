@@ -18,9 +18,9 @@ export class RegistroComponent implements OnInit {
   fotoPerfil !: File;
   segundaFoto !:File;
   pathFotoPerfil : string = '';
-  pathSegundaFoto : string = '';
+  pathSegundaFoto : string = '';  
  
-  constructor(private fb:FormBuilder, private spinner: NgxSpinnerService, private usuarioServ : UsuariosService, private imgServ : ImagenService,private auth : AuthService) { 
+  constructor( private fb:FormBuilder, private spinner: NgxSpinnerService, private usuarioServ : UsuariosService, private imgServ : ImagenService,private auth : AuthService) { 
     
     this.formRegistro = this.fb.group(
       {
@@ -30,16 +30,17 @@ export class RegistroComponent implements OnInit {
         'dni':['',[Validators.required,Validators.minLength(6)]],
         'email': ['',[Validators.required,Validators.email]],
         'clave':['',[Validators.required,Validators.minLength(6)]],
-        'rol': ['',[Validators.required]],
+        //'rol': ['',[Validators.required]],
         'obraSocial': ['',[Validators.required,Validators.minLength(3)]],
         'especialidad' : ['',[Validators.required]],
         'segundaImagen' : ['',[Validators.required]],
         'fotoPerfil' : ['',[Validators.required]],
       }
-    )
+    );
   } 
   
   ngOnInit(): void {
+
     /** spinner starts on init */
     this.spinner.show();
   
@@ -54,6 +55,8 @@ export class RegistroComponent implements OnInit {
     delete this.formRegistro.value.segundaImagen;
     delete this.formRegistro.value.fotoPerfil;
     this.nuevoUsuario = this.formRegistro.value;
+    this.nuevoUsuario.rol = this.tipoUsuario;
+    //console.log(this.nuevoUsuario);
     
     this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;     
     this.nuevoUsuario.fotos = (this.tipoUsuario == 'paciente') ? this.pathFotoPerfil+','+this.pathSegundaFoto : this.pathFotoPerfil;   
@@ -96,7 +99,21 @@ export class RegistroComponent implements OnInit {
 
       //faltaria la 2da imagen
     }else if(this.tipoUsuario == 'medico'){
+      //console.log(this.tipoUsuario);
+      
       this.formRegistro.get('especialidad')?.setValidators([Validators.required]);
+      this.formRegistro.get('especialidad')?.updateValueAndValidity();
+
+      this.formRegistro.get('obraSocial')?.clearValidators();
+      this.formRegistro.get('obraSocial')?.updateValueAndValidity();
+
+      this.formRegistro.get('segundaImagen')?.clearValidators();
+      this.formRegistro.get('segundaImagen')?.updateValueAndValidity();
+    }
+    else if(this.tipoUsuario == 'admin'){
+      //console.log(this.tipoUsuario);
+      
+      this.formRegistro.get('especialidad')?.clearValidators();
       this.formRegistro.get('especialidad')?.updateValueAndValidity();
 
       this.formRegistro.get('obraSocial')?.clearValidators();
@@ -126,6 +143,12 @@ export class RegistroComponent implements OnInit {
 
   cargarUsuario(usuario:string){
     this.tipoUsuario = usuario;
+    this.eligeTipoUsuario();
+  }
+
+  cambiarUsuario(){
+    this.tipoUsuario = '' ;
+    this.formRegistro.reset();
   }
   
 }

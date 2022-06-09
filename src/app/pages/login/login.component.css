@@ -1,14 +1,23 @@
-.container{
+/*.container{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
+}*/
+
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(135, 124, 210);    
+    width: 100vw;
 }
 
 .boton-imagen{
-    height: 10vh;
+    height: 12vh;
     background-color: rgb(101, 89, 89);
     border-radius: 18px;
-    width: 10vh;
+    width: 18vh;
 }
