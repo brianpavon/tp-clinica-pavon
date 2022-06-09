@@ -11,6 +11,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatCardModule,
     MatTableModule,
     MatSlideToggleModule,
+    MatToolbarModule,
   ],
   exports:[
     MatSliderModule,
@@ -40,6 +42,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatCardModule,
     MatTableModule,
     MatSlideToggleModule,
+    MatToolbarModule,
   ]
 })
 export class MaterialModule { }

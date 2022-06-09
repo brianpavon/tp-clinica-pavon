@@ -123,4 +123,9 @@ export class RegistroComponent implements OnInit {
       //console.log(this.pathSegundaFoto);
     }
   }
+
+  cargarUsuario(usuario:string){
+    this.tipoUsuario = usuario;
+  }
+  
 }

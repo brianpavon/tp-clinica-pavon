@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { MaterialModule } from './material/material.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FooterComponent,
     LoginComponent,
     PaginaErrorComponent,
-    RegistroComponent
+    RegistroComponent,
+    TipoUsuarioComponent
   ],
   imports: [
     BrowserModule,
