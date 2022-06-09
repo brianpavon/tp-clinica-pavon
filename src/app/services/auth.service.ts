@@ -34,12 +34,14 @@ export class AuthService {
   async login(email:string, password:string){
     return this.auth.signInWithEmailAndPassword(email,password).then(
       async e=>{
-        if(e.user?.email == 'admin@mail.com'){
+        if(e.user?.email == 'admin@mail.com' ){
           this.router.navigate(['/panel-control']);
           setTimeout(() => {
             this.loginExitoso('Bienvenido nuevamente!');        
           }, 2000);
-        }else if(e.user?.emailVerified && e.user?.email != 'admin@mail.com' ){        
+        }else if(e.user?.emailVerified && e.user?.email != 'admin@mail.com' ){
+          //console.log(e.user.uid);
+                  
           this.usuarioDB = await this.userService.devolverDataUsuarioDB(e.user.uid);
 
           switch (this.usuarioDB.rol) {

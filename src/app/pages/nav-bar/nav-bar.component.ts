@@ -11,10 +11,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  logged : boolean = false;
-  esPaciente : boolean = false;
-  esMedico : boolean = false;
-  esAdmin : boolean = false;
+  
+  rol : string = "";  
   usuarioLogueado : any;
   usuarioDB : any;
   constructor(private auth:AngularFireAuth,private authServ:AuthService, private routes:Router, private userService : UsuariosService) { 
@@ -24,22 +22,16 @@ export class NavBarComponent implements OnInit {
         if(user?.email == 'admin@mail.com'){
           this.usuarioDB = await this.userService.devolverDataUsuarioDB("8yGBWwGoTDFeK3Ah14lG");
           this.usuarioLogueado = user.email;
-          this.logged = true;
+          this.rol = 'admin';          
         }
-        else if (user && user?.emailVerified && user?.email != 'admin@mail.com' ){
+        else if (user && user?.emailVerified){
           this.usuarioDB = await this.userService.devolverDataUsuarioDB(user?.uid);
           this.usuarioLogueado = user.email;
-          this.logged = true;
+          //console.log(this.usuarioDB);
+          
+          this.rol = this.usuarioDB?.rol;          
         }
-        if(this.usuarioDB.rol == 'admin'){
-          this.esAdmin = true;
-        }
-        else if(this.usuarioDB.rol == 'paciente'){
-          this.esPaciente = true;
-        }
-        else if(this.usuarioDB.rol == 'medico'){
-          this.esMedico = true;
-        }
+        
       }
     )
 
@@ -49,13 +41,9 @@ export class NavBarComponent implements OnInit {
   }
 
   desloguearse(){
-    this.authServ.logout();
-    this.logged = false;
+    this.authServ.logout();    
     this.usuarioLogueado = '';
     this.usuarioDB = '';
-    this.esPaciente = false;
-    this.esMedico = false;
-    this.esAdmin = false;
-    //this.routes.navigate(['/home']);
+    this.rol = '';    
   }
 }
