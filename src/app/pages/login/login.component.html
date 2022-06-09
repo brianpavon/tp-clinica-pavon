@@ -1,17 +1,45 @@
-<div class="container p-2">
-    <form class="form-signin">
+<div class="container">
+  <div class="row d-flex justify-content-around">
+    <div class="col-md-8 mr-5">
+        <form class="form-signin">
+        
+        <img class="mx-auto d-block" src="assets/images/foto-login.png" alt="" width="72" height="72">
+      
+        <h1  class="h3 mb-3 font-weight-normal">Ingreso</h1>
+      
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" #inputEmail class="form-control m-2" placeholder="Email" required autofocus >
     
-    <img class="mx-auto d-block" src="assets/images/foto-login.png" alt="" width="72" height="72">
-  
-    <h1  class="h3 mb-3 font-weight-normal">Ingreso</h1>
-  
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" #inputEmail class="form-control m-2" placeholder="Email" required autofocus >
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" #inputPassword class="form-control m-2" placeholder="Contraseña" required>
+    
+        <button class="btn btn-lg btn-primary btn-block m-2" type="button" (click)="login(inputEmail.value,inputPassword.value)">Ingresar</button>
+        <label>Aún no tenes cuenta? <a routerLink="/registro">Registrarse</a></label>
+      </form>
+    </div>
 
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" #inputPassword class="form-control m-2" placeholder="Contraseña" required>
+    <div class="d-flex align-items-center flex-column">
+      <div class="list-group" >
+        <button type="button"  class="boton-imagen mb-2">                
+          <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="..." width="75%" height="75%" >
+        </button>
+        <button type="button"  class="boton-imagen mb-2">                
+          <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="..." width="75%" height="75%" >
+        </button>
+        <button type="button"  class="boton-imagen mb-2">                
+          <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="..." width="75%" height="75%" >
+        </button>
+        <button type="button"  class="boton-imagen mb-2">                
+          <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="..." width="75%" height="75%" >
+        </button>
+        <button type="button"  class="boton-imagen mb-2">                
+          <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="..." width="75%" height="75%" >
+        </button>
+        <button type="button"  class="boton-imagen mb-2">                
+          <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="..." width="75%" height="75%" >
+        </button>
+      </div>
+    </div>
 
-    <button class="btn btn-lg btn-primary btn-block m-2" type="button" (click)="login(inputEmail.value,inputPassword.value)">Ingresar</button>
-    <label>Aún no tenes cuenta? <a routerLink="/registro">Registrarse</a></label>
-  </form>
+  </div>
 </div>

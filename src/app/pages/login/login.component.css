@@ -3,5 +3,12 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 70vh;
+    height: 100vh;
+}
+
+.boton-imagen{
+    height: 10vh;
+    background-color: rgb(101, 89, 89);
+    border-radius: 18px;
+    width: 10vh;
 }
