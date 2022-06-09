@@ -21,6 +21,7 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { MaterialModule } from './material/material.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
+import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -44,9 +45,18 @@ import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.componen
     AngularFireStorageModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RecaptchaFormsModule,
+    RecaptchaModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
+    }
+  ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

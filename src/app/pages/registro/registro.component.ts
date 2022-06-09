@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ImagenService } from 'src/app/services/imagen.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -35,6 +36,7 @@ export class RegistroComponent implements OnInit {
         'especialidad' : ['',[Validators.required]],
         'segundaImagen' : ['',[Validators.required]],
         'fotoPerfil' : ['',[Validators.required]],
+        'captcha' : [null,Validators.required]
       }
     );
   } 
@@ -54,16 +56,17 @@ export class RegistroComponent implements OnInit {
     //console.log(this.formRegistro.value);
     delete this.formRegistro.value.segundaImagen;
     delete this.formRegistro.value.fotoPerfil;
+    delete this.formRegistro.value.captcha;
     this.nuevoUsuario = this.formRegistro.value;
     this.nuevoUsuario.rol = this.tipoUsuario;
-    //console.log(this.nuevoUsuario);
+    console.log(this.nuevoUsuario);
     
-    this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;     
+    this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;    
     this.nuevoUsuario.fotos = (this.tipoUsuario == 'paciente') ? this.pathFotoPerfil+','+this.pathSegundaFoto : this.pathFotoPerfil;   
     try {
       await this.auth.register(this.nuevoUsuario.email,this.nuevoUsuario.clave);      
       this.nuevoUsuario.id = this.auth.userFirebase.uid;
-      //console.log(this.auth.userFirebase.uid);
+      console.log(this.auth.userFirebase.uid);
       
       if(this.tipoUsuario == 'paciente'){
         delete this.nuevoUsuario.habilitado;
@@ -150,5 +153,5 @@ export class RegistroComponent implements OnInit {
     this.tipoUsuario = '' ;
     this.formRegistro.reset();
   }
-  
+
 }

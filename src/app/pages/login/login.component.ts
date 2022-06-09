@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
-    }, 1500);
+    }, 1500);    
     this.cargarIngresoRapido();
   }
 

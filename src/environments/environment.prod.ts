@@ -7,5 +7,8 @@ export const environment = {
     authDomain: 'tp-clinica-pavon.firebaseapp.com',
     messagingSenderId: '217517199631',
   },
-  production: true
+  production: true,
+  recaptcha: {
+    siteKey: '6LcC6VogAAAAAM3MP8Y8QtKJpLx32qqJp78V9_7i',
+  },
 };
