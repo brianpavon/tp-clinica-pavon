@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   medicos : number = 2;  
 
   constructor(private spinner: NgxSpinnerService,private auth :AuthService,private routes : Router, private userServ:UsuariosService, private imgServ : ImagenService) {
+    
   }
   
   ngOnInit(): void {
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  cargarIngresoRapido(){
+  cargarIngresoRapido(){    
     this.userServ.traerUsuarios().subscribe(
       usuarios =>{
         //console.log(usuarios);
@@ -63,7 +64,7 @@ export class LoginComponent implements OnInit {
             this.listaUsuarios.push(usuario);
             this.pacientes--;
           }
-          if(usuario.rol == 'medico' && this.medicos){
+          if(usuario.rol == 'medico' && this.medicos>0 && usuario.email != 'rfrrdfd@dd.dd'){
             this.listaUsuarios.push(usuario);
             this.medicos--;
           }

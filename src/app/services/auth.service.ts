@@ -39,7 +39,7 @@ export class AuthService {
           setTimeout(() => {
             this.loginExitoso('Bienvenido nuevamente!');        
           }, 2000);
-        }else if(e.user?.emailVerified){        
+        }else if(e.user?.emailVerified && e.user?.email != 'admin@mail.com' ){        
           this.usuarioDB = await this.userService.devolverDataUsuarioDB(e.user.uid);
 
           switch (this.usuarioDB.rol) {

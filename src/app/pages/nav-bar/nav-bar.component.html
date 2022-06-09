@@ -11,8 +11,14 @@
         <li class="nav-item active" *ngIf="!logged">
           <a class="nav-link" routerLink="/login">Ingresar</a>
         </li>
-        <li class="nav-item active" *ngIf="this.usuarioLogueado == 'admin@mail.com'">
+        <li class="nav-item active" *ngIf="esAdmin">
           <a class="nav-link" routerLink="/panel-control">Panel Control</a>
+        </li>
+        <li class="nav-item active" *ngIf="esMedico">
+          <a class="nav-link" routerLink="">Perfil Especialista</a>
+        </li>
+        <li class="nav-item active" *ngIf="esPaciente">
+          <a class="nav-link" routerLink="">Mi Perfil</a>
         </li>
         
         <!--<li class="nav-item">
