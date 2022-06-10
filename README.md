@@ -44,9 +44,25 @@ Los nuevos usuarios que quieran ingresar pueden seleccionar entre perfil `Pacien
 
 ## Panel de Control
 
-  A esta sección solo pueden acceder los Administradores. 
-  Podemos listar los pacientes, los especialistas y aprobarlos para que comiencen a atender. Además de dar de alta cualquier tipo de perfil de empleado.
+A esta sección solo pueden acceder los Administradores. 
+Podemos listar los pacientes, los especialistas y aprobarlos para que comiencen a atender. 
+Además de dar de alta cualquier tipo de perfil de la clínica.
   
 ![Captura](https://user-images.githubusercontent.com/53911453/172967145-f54eece6-3506-484b-81ba-4042d2042c6c.PNG)
+
+# Especialistas
+
+Desde aquí se puede ver la información de los especialistas.
+Y desde la columna `Habilitado` se permite que los especialistas comiencen a atender y además que puedan ingresar al perfil.
+
+![image](https://user-images.githubusercontent.com/53911453/172967488-ff671a0a-02e3-4b80-aeea-9da0d3833a68.png)
+
+# Pacientes
+ 
+Desde aquí se ve la información referida a los pacientes
+
+![image](https://user-images.githubusercontent.com/53911453/172967564-3176c7a9-07bb-4e7a-b9b6-3fe06cfc571d.png)
+
+
 
   
