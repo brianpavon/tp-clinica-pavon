@@ -1,5 +1,10 @@
 <div class="body">
-    <table mat-table [dataSource]="todosLosMedicos" class="mat-elevation-z8">
+  <div class="container">
+    <mat-toolbar class="justify-content-center mt-2 mb-5">
+      <span>Especialistas</span>
+    </mat-toolbar>
+    <div class="row justify-content-center">
+      <table mat-table [dataSource]="todosLosMedicos" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -47,6 +52,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+    </div>
+    <div class="row justify-content-center mt-2 mb-5">
+      <a title="Volver al Panel" routerLink="/panel-control"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon></a>
+    </div>
+
+  </div>
+    
     
 </div>
-    <a routerLink="/panel-control"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon></a>    
+        
