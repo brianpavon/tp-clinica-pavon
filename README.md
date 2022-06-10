@@ -3,12 +3,12 @@ Este documento va a contener una breve descripción de como usar la aplicación.
 
 ## Sitio web
 Esta aplicación se puede probar en [La Clínica Online](https://tp-clinica-pavon.web.app/).
-![Captura](https://user-images.githubusercontent.com/53911453/172965020-c7a83991-f320-4894-8d65-b403478535e0.PNG)
 
 
 ## Tipo de Usuarios
 La Clínica Online tiene 3 tipos de usuarios.
 Administrador, Especialista/Médico y Paciente
+![Captura](https://user-images.githubusercontent.com/53911453/172965020-c7a83991-f320-4894-8d65-b403478535e0.PNG)
 
 
 ## Build
