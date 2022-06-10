@@ -47,5 +47,6 @@ Los nuevos usuarios que quieran ingresar pueden seleccionar entre perfil `Pacien
   A esta sección solo pueden acceder los Administradores. 
   Podemos listar los pacientes, los especialistas y aprobarlos para que comiencen a atender. Además de dar de alta cualquier tipo de perfil de empleado.
   
-![image](https://user-images.githubusercontent.com/53911453/172967097-ccdf922e-206c-45ff-9f32-7959276cd17e.png)
+![Captura](https://user-images.githubusercontent.com/53911453/172967145-f54eece6-3506-484b-81ba-4042d2042c6c.PNG)
+
   
