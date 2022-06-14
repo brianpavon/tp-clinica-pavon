@@ -21,12 +21,13 @@ export class NavBarComponent implements OnInit {
         if(!user) return;
         if(user?.email == 'admin@mail.com'){
           this.usuarioDB = await this.userService.devolverDataUsuarioDB("8yGBWwGoTDFeK3Ah14lG");
-          this.usuarioLogueado = user.email;
+          this.usuarioLogueado = `${this.usuarioDB.nombre}  ${this.usuarioDB.apellido}`;
           this.rol = 'admin';          
         }
         else if (user && user?.emailVerified){
           this.usuarioDB = await this.userService.devolverDataUsuarioDB(user?.uid);
-          this.usuarioLogueado = user.email;
+          //this.usuarioLogueado = user.email;
+          this.usuarioLogueado = `${this.usuarioDB.nombre}  ${this.usuarioDB.apellido}`;
           //console.log(this.usuarioDB);
           
           this.rol = this.usuarioDB?.rol;          

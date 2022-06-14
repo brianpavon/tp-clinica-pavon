@@ -12,7 +12,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class MiPerfilComponent implements OnInit {
 
   infoUsuario : Usuarios | undefined;
-  urlImagen:string = '';
+  urlImagen : string = '';
+  urlSegundaImagen : string = "";
   constructor(private userServ : UsuariosService, private imgServ : ImagenService, private authServ : AuthService) {
 
    }
@@ -29,11 +30,15 @@ export class MiPerfilComponent implements OnInit {
         //console.log(usuarioLogueado);
         this.infoUsuario = await this.userServ.devolverDataUsuarioDB(usuarioLogueado?.uid);
         //console.log(this.infoUsuario);
-        this.imgServ.descargarImagen(this.infoUsuario?.fotoPerfil).subscribe(url =>{
+        this.imgServ.descargarImagen(this.infoUsuario?.fotoPerfil).subscribe(url =>{          
           this.urlImagen = url;
-  
-          console.log(this.urlImagen);
-        })
+          //console.log(this.urlImagen);
+        });
+        if(this.infoUsuario?.rol == 'paciente'){
+          this.imgServ.descargarImagen(this.infoUsuario?.fotoDos).subscribe(url =>{          
+            this.urlSegundaImagen = url;
+          });
+        }
       }
     )
   }

@@ -14,6 +14,7 @@ const routes: Routes = [
   {path:'registro',component:RegistroComponent},
   {path:'mi-perfil',component:MiPerfilComponent},
   {path:'panel-control',loadChildren:()=> import('./pages/dashboard/dashboard.module').then( m => m.DashboardModule)},
+  {path: 'turnos', loadChildren:()=>import('./pages/turnos/turnos.module').then(t => t.TurnosModule)},
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'**',component:PaginaErrorComponent}
 ];
