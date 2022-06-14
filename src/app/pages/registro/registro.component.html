@@ -88,8 +88,8 @@
                 </div>
                 <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente' ">                   
                     <div class="col3">
-                        <button type="button" (click)="segundaImagen.click()" mat-flat-button color="primary">Subir Segunda Foto</button>
-                        <input name="segundaImagen" #segundaImagen (change)="guardarImagen($event)" hidden type="file" accept=".jpg, .png, .jpeg, .svg" formControlName="segundaImagen">
+                        <button type="button" (click)="fotoDos.click()" mat-flat-button color="primary">Subir Segunda Foto</button>
+                        <input name="fotoDos" #fotoDos (change)="guardarImagen($event)" hidden type="file" accept=".jpg, .png, .jpeg, .svg" formControlName="fotoDos">
                     </div>
                 </div>
             </div>

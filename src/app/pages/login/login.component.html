@@ -23,7 +23,7 @@
       <div class="d-flex col-md-4 align-items-center flex-column" style="border-left: 2px solid black;">
         <div class="list-group" *ngFor="let usuario of listaUsuarios" >
           <button (click)="login(usuario.email,usuario.clave)" type="button"  class="boton-imagen mb-2" title="Ingresar como {{ usuario.nombre }} {{ usuario.apellido }}. Su rol es: {{ usuario.rol }}">
-            <img [src]="usuario.fotos.startsWith('https') ? usuario.fotos : '/assets/images/gif-buscar.gif'" class="mx-auto d-block" alt="..." width="75%" height="75%" >
+            <img [src]="usuario.fotoPerfil.startsWith('https') ? usuario.fotoPerfil : '/assets/images/gif-buscar.gif'" class="mx-auto d-block" alt="..." width="75%" height="75%" >
           </button>        
         </div>
       </div>

@@ -34,7 +34,7 @@ export class RegistroComponent implements OnInit {
         //'rol': ['',[Validators.required]],
         'obraSocial': ['',[Validators.required,Validators.minLength(3)]],
         'especialidad' : ['',[Validators.required]],
-        'segundaImagen' : ['',[Validators.required]],
+        'fotoDos' : ['',[Validators.required]],
         'fotoPerfil' : ['',[Validators.required]],
         'captcha' : [null,Validators.required]
       }
@@ -61,12 +61,16 @@ export class RegistroComponent implements OnInit {
     this.nuevoUsuario.rol = this.tipoUsuario;
     console.log(this.nuevoUsuario);
     
-    this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;    
-    this.nuevoUsuario.fotos = (this.tipoUsuario == 'paciente') ? this.pathFotoPerfil+','+this.pathSegundaFoto : this.pathFotoPerfil;   
+    this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;
+    if(this.tipoUsuario == 'admin'){      
+      delete this.nuevoUsuario.especialidad;
+    }
+    this.nuevoUsuario.fotoPerfil = this.pathFotoPerfil;
+    this.nuevoUsuario.fotoDos = (this.tipoUsuario == 'paciente') ? this.pathSegundaFoto : "";
     try {
       await this.auth.register(this.nuevoUsuario.email,this.nuevoUsuario.clave);      
       this.nuevoUsuario.id = this.auth.userFirebase.uid;
-      console.log(this.auth.userFirebase.uid);
+      //console.log(this.auth.userFirebase.uid);
       
       if(this.tipoUsuario == 'paciente'){
         delete this.nuevoUsuario.habilitado;
@@ -97,8 +101,8 @@ export class RegistroComponent implements OnInit {
       this.formRegistro.get('especialidad')?.clearValidators();
       this.formRegistro.get('especialidad')?.updateValueAndValidity();
 
-      this.formRegistro.get('segundaImagen')?.setValidators([Validators.required]);
-      this.formRegistro.get('segundaImagen')?.updateValueAndValidity();
+      this.formRegistro.get('fotoDos')?.setValidators([Validators.required]);
+      this.formRegistro.get('fotoDos')?.updateValueAndValidity();
 
       //faltaria la 2da imagen
     }else if(this.tipoUsuario == 'medico'){
@@ -110,8 +114,8 @@ export class RegistroComponent implements OnInit {
       this.formRegistro.get('obraSocial')?.clearValidators();
       this.formRegistro.get('obraSocial')?.updateValueAndValidity();
 
-      this.formRegistro.get('segundaImagen')?.clearValidators();
-      this.formRegistro.get('segundaImagen')?.updateValueAndValidity();
+      this.formRegistro.get('fotoDos')?.clearValidators();
+      this.formRegistro.get('fotoDos')?.updateValueAndValidity();
     }
     else if(this.tipoUsuario == 'admin'){
       //console.log(this.tipoUsuario);
@@ -122,8 +126,8 @@ export class RegistroComponent implements OnInit {
       this.formRegistro.get('obraSocial')?.clearValidators();
       this.formRegistro.get('obraSocial')?.updateValueAndValidity();
 
-      this.formRegistro.get('segundaImagen')?.clearValidators();
-      this.formRegistro.get('segundaImagen')?.updateValueAndValidity();
+      this.formRegistro.get('fotoDos')?.clearValidators();
+      this.formRegistro.get('fotoDos')?.updateValueAndValidity();
     }
     
   }
@@ -136,7 +140,7 @@ export class RegistroComponent implements OnInit {
       //console.log(this.pathFotoPerfil);
         
     }
-    else if(event.target.name == 'segundaImagen'){
+    else if(event.target.name == 'fotoDos'){
       const fileDos : File = event.target.files[0];
       this.segundaFoto = fileDos;      
       this.pathSegundaFoto = event.target.files[0].name;  

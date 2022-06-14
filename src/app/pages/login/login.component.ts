@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit {
             this.listaUsuarios.push(usuario);
           }
           //el paciente tiene 2 fotos, asi que tomo la primera
-          if(usuario.rol == 'paciente' && this.pacientes>0){
-            usuario.fotos = usuario.fotos.split(',')[0];
+          if(usuario.rol == 'paciente' && this.pacientes > 0){
+            //usuario.fotos = usuario.fotos.split(',')[0];
             this.listaUsuarios.push(usuario);
             this.pacientes--;
           }
@@ -69,9 +69,9 @@ export class LoginComponent implements OnInit {
             this.medicos--;
           }
           
-          this.imgServ.descargarImagen(usuario.fotos).subscribe(
+          this.imgServ.descargarImagen(usuario.fotoPerfil).subscribe(
             url =>{
-              usuario.fotos = url;
+              usuario.fotoPerfil = url;
               //console.log(url);
             }
           )

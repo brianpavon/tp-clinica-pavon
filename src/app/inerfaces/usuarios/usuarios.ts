@@ -9,7 +9,8 @@ export interface Usuarios {
     clave:string;    
     especialidad?:string;
     obraSocial?:string;
-    fotos:string;
+    fotoPerfil:string;
+    fotoDos?:string;
     estado:boolean;
     habilitado?:boolean
 }
