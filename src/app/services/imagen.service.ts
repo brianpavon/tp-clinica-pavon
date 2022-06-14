@@ -14,7 +14,7 @@ export class ImagenService {
     const task = this.storage.upload(path, archivo);
   }
 
-  descargarImagen(urlImg:string){
+  descargarImagen(urlImg:any){
     const ref = this.storage.ref(urlImg);
     return this.url = ref.getDownloadURL();
   }

@@ -13,26 +13,26 @@
 
                         <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem;">
                             <h5>Foto de Perfil</h5>
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width: 80px"/>
+                            <img src="{{urlImagen}}" alt="Avatar" class="img-fluid my-5" style="width: 80px"/>
                             <h5>Foto extra</h5>
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width: 80px"/>
                             <i class="far fa-edit mb-5"></i>
                         </div>
                 
 
-                        <div class="col-md-8">
+                        <div class="col-md-8" *ngIf="infoUsuario">
                             <div class="card-body p-4">
-                                <h6>NOMBRE APELLIDO</h6>
+                                <h6>{{ infoUsuario.nombre }} {{ infoUsuario.apellido }} </h6>
                                 <hr class="mt-0 mb-4" />
 
                                 <div class="row pt-1">
                                     <div class="col-6 mb-3">
                                         <h6>Email</h6>
-                                        <p class="text-muted">EMAIL</p>
+                                        <p class="text-muted">{{ infoUsuario.email }}</p>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <h6>Edad</h6>
-                                        <p class="text-muted">EDAD</p>
+                                        <p class="text-muted">{{ infoUsuario.edad }}</p>
                                     </div>
                                 </div>                  
                             </div>
@@ -41,14 +41,14 @@
                                 
                                 <div class="row pt-1">
 
-                                    <div class="col-6 mb-3">
+                                    <div class="col-6 mb-3" *ngIf="infoUsuario.rol == 'paciente'">
                                         <h6>Obra Social</h6>
-                                        <p class="text-muted">OBRA SOCIAL</p>
+                                        <p class="text-muted">{{ infoUsuario.obraSocial }}</p>
                                     </div>
 
-                                    <div class="col-6 mb-3">
+                                    <div class="col-6 mb-3" *ngIf="infoUsuario.rol == 'medico'">
                                         <h6>Especialidad</h6>
-                                        <p class="text-muted">ESPECIALIDAD</p>
+                                        <p class="text-muted">{{ infoUsuario.especialidad }}</p>
                                     </div>
 
                                 </div> 
