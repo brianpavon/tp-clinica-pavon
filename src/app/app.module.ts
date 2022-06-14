@@ -22,6 +22,7 @@ import { MaterialModule } from './material/material.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SET
     LoginComponent,
     PaginaErrorComponent,
     RegistroComponent,
-    TipoUsuarioComponent
+    TipoUsuarioComponent,
+    MiPerfilComponent
   ],
   imports: [
     BrowserModule,
