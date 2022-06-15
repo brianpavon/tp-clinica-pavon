@@ -31,26 +31,26 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form [formGroup]="formEspecialidad" (ngSubmit)="nuevaEspecialidad()" class="regForm">
         <div class="modal-body">
-            <form  class="regForm">
                 <div class="row">
                     <div class="col-md-6">
                         <mat-form-field appearance="fill">
                             <mat-label>Descripción</mat-label>
-                            <input matInput>
+                            <input matInput formControlName="descripcion">
                         </mat-form-field>
                     </div>                    
                     <div class="col-md-6">
-                        <button type="button"  mat-flat-button color="primary">Imagen Especialidad</button>
-                        <input name="fotoDos" #fotoDos hidden type="file" accept=".jpg, .png, .jpeg, .svg">
+                        <button type="button"  mat-flat-button color="primary" (click)="fotoEspec.click()">Suba Imagen de la Especialidad</button>
+                        <input name="fotoEspec" #fotoEspec hidden type="file" accept=".jpg, .png, .jpeg, .svg" (change)="cargarImagen($event)">
                     </div>
                 </div>                
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" mat-flat-button color="warn" data-dismiss="modal">Cancelar</button>
-          <button type="button" mat-flat-button color="accent">Guardar</button>
-        </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" mat-flat-button color="warn" data-dismiss="modal">Cancelar</button>
+                <button [disabled]="formEspecialidad.invalid" type="submit" mat-flat-button color="accent">Guardar</button>
+            </div>
+        </form>
       </div>
     </div>
   </div>

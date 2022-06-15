@@ -14,8 +14,8 @@ export class EspecialidadesService {
 
   }
 
-  guardarTurno(nuevoTurno : Especialidades){
-    this.firestore.collection('especialidades').add(nuevoTurno);
+  guardarEspecialidad(nuevaEspec : Especialidades){
+    this.firestore.collection('especialidades').add(nuevaEspec);
   }
 
   traerTodasLasEspecialidades(){

@@ -59,7 +59,7 @@ export class RegistroComponent implements OnInit {
     delete this.formRegistro.value.captcha;
     this.nuevoUsuario = this.formRegistro.value;
     this.nuevoUsuario.rol = this.tipoUsuario;
-    console.log(this.nuevoUsuario);
+    //console.log(this.nuevoUsuario);
     
     this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;
     if(this.tipoUsuario == 'admin'){      

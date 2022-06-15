@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Especialidades } from 'src/app/interfaces/especialidades';
 import { EspecialidadesService } from 'src/app/services/especialidades.service';
 import { ImagenService } from 'src/app/services/imagen.service';
@@ -10,9 +11,17 @@ import { ImagenService } from 'src/app/services/imagen.service';
 })
 export class EspecialidadesComponent implements OnInit {
   listaEspecialidades : Especialidades[] = [];
+  formEspecialidad:FormGroup;
+  especialidadNueva !: Especialidades;
+  imgEspec !: File;
+  urlImgEsp : string = '';
   
-  constructor(private servEsp : EspecialidadesService, private imgServ : ImagenService) {
-
+  constructor(private servEsp : EspecialidadesService, private imgServ : ImagenService, private fb : FormBuilder) {
+    this.formEspecialidad = this.fb.group(
+      {
+        'descripcion':['',[Validators.required,Validators.minLength(5)]]
+      }
+    )
   }
 
   ngOnInit(): void {
@@ -35,5 +44,23 @@ export class EspecialidadesComponent implements OnInit {
       }
     )
   }
+
+  async nuevaEspecialidad(){
+    this.especialidadNueva = this.formEspecialidad.value;
+    this.especialidadNueva.urlFoto = this.urlImgEsp;
+    
+    //console.log(this.especialidadNueva);
+    this.servEsp.guardarEspecialidad(this.especialidadNueva);
+    if(this.urlImgEsp != "") this.imgServ.guardarImagen(this.imgEspec,this.urlImgEsp);
+    this.formEspecialidad.reset();    
+    //@ts-ignore
+    $('#altaEspecialidad').modal('hide')
+  }
+
+  cargarImagen(event : any){
+    const fileImg : File = event.target.files[0];
+    this.imgEspec = fileImg;      
+    this.urlImgEsp = event.target.files[0].name;
+  }  
 
 }
