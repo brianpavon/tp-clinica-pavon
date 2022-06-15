@@ -1,1 +1,56 @@
-<p>especialidades works!</p>
+<h4 *ngIf="listaEspecialidades.length > 0" class="d-flex align-items-center mb-3 text-center">
+    <span class="text-white">Elija sus Especialidades</span>
+</h4>
+<ul class="list-group mb-3 ulEspec" *ngIf="listaEspecialidades.length > 0">
+    <li *ngFor="let especialidad of listaEspecialidades" class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+            <mat-checkbox color="accent" class="example-margin"></mat-checkbox>
+        </div>
+        <div>
+            <h4 class="my-0"> {{ especialidad.descripcion }}</h4>        
+        </div>
+        <img [src]="especialidad.urlFoto?.startsWith('https') ? especialidad.urlFoto : '/assets/images/gif-buscar.gif'" alt="imagen especialidad">
+    </li>
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+            <button type="button" mat-flat-button color="primary" data-toggle="modal" data-target="#altaEspecialidad">
+                Agregue una nueva
+            </button>
+        </div>
+    </li>
+</ul>
+
+
+<!-- Modal -->
+<div class="modal fade" id="altaEspecialidad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content text-white" style="background-color: blueviolet;">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">Nueva Especialidad</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form  class="regForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Descripción</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>                    
+                    <div class="col-md-6">
+                        <button type="button"  mat-flat-button color="primary">Imagen Especialidad</button>
+                        <input name="fotoDos" #fotoDos hidden type="file" accept=".jpg, .png, .jpeg, .svg">
+                    </div>
+                </div>                
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" mat-flat-button color="warn" data-dismiss="modal">Cancelar</button>
+          <button type="button" mat-flat-button color="accent">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>

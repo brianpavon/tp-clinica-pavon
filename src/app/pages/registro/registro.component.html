@@ -106,4 +106,7 @@
             <button type="submit" [disabled]="formRegistro.invalid" class="btn btn-block" mat-flat-button color="accent">Registrarme</button>
         </form>
     </div>
+    <div *ngIf="tipoUsuario == 'medico'" class="col-md-2 order-md-2 mb-5">
+        <app-especialidades></app-especialidades>
+    </div>
 </div>
