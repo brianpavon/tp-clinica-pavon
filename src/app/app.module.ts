@@ -23,6 +23,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
+import { EspecialidadesComponent } from './pages/especialidades/especialidades.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
     PaginaErrorComponent,
     RegistroComponent,
     TipoUsuarioComponent,
-    MiPerfilComponent
+    MiPerfilComponent,
+    EspecialidadesComponent
   ],
   imports: [
     BrowserModule,
